@@ -7,6 +7,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.LinkedList;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,19 +21,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.i("TAG", "something happened.");
+        Log.i("TAG", "started.");
+
+        Personal personal = new Personal("000");
+        List<String> contactList = new LinkedList<>();
+        AsyncClient asyncClient = new AsyncClient();
+        AsyncWebServer asyncServer = new AsyncWebServer();
+        asyncServer.startServer();
 
         button = (Button) findViewById(R.id.button);
         message = (EditText) findViewById(R.id.message);
+        String netAddress = null;
+        try {
+            netAddress = new NetTask().execute().get();
+        } catch (Exception e) {e.printStackTrace();}
+        message.setText(netAddress);
         messages = (TextView) findViewById(R.id.Messages);
-
         button.setOnClickListener(v -> {
             String text = messages.getText().toString();
             messages.setText(text + "\r\n" + message.getEditableText());
         });
 
-        new AsyncWebServer().startServer();
-        String startUrl = "https://api.github.com/repos/square/okhttp/contributors";
-        new AsyncClient(startUrl);
+        asyncClient.init(personal.getId(), netAddress, contactList).start();
     }
 }

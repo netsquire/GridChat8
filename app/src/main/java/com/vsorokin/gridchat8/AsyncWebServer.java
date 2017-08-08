@@ -10,8 +10,7 @@ import com.koushikdutta.async.AsyncServer;
 import com.koushikdutta.async.http.Multimap;
 import com.koushikdutta.async.http.server.AsyncHttpServer;
 
-
-public class AsyncWebServer extends AppCompatActivity {
+public class AsyncWebServer extends AppCompatActivity implements Runnable {
 
     private AsyncHttpServer server = new AsyncHttpServer();
     private AsyncServer mAsyncServer = new AsyncServer();
@@ -33,12 +32,6 @@ public class AsyncWebServer extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         Log.i("TODO", " - onOptionsItemSelected(Menu menu) launched.");
-        /*
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        */
-        //return super.onOptionsItemSelected(item);
         return true;
     }
 
@@ -56,6 +49,11 @@ public class AsyncWebServer extends AppCompatActivity {
             response.send("<h1>Got: " + query.entrySet().toString() + "</h1>");
         });
         server.listen(mAsyncServer, 8080);
+    }
+
+    @Override
+    public void run() {
+        this.startServer();
     }
 }
 
