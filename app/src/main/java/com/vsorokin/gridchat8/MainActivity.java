@@ -10,7 +10,6 @@ import android.widget.TextView;
 import java.util.LinkedList;
 import java.util.List;
 
-
 public class MainActivity extends AppCompatActivity {
 
     TextView messages;
@@ -25,23 +24,11 @@ public class MainActivity extends AppCompatActivity {
 
         Personal personal = new Personal("000");
         List<String> contactList = new LinkedList<>();
-        AsyncClient asyncClient = new AsyncClient();
-        AsyncWebServer asyncServer = new AsyncWebServer();
-        asyncServer.startServer();
-
+        NetProcessor netProcessor = new NetProcessor("net processor", personal.getId());
         button = (Button) findViewById(R.id.button);
         message = (EditText) findViewById(R.id.message);
-        String netAddress = null;
-        try {
-            netAddress = new NetTask().execute().get();
-        } catch (Exception e) {e.printStackTrace();}
-        message.setText(netAddress);
+        message.setText(netProcessor.getNetAddress());
         messages = (TextView) findViewById(R.id.Messages);
-        button.setOnClickListener(v -> {
-            String text = messages.getText().toString();
-            messages.setText(text + "\r\n" + message.getEditableText());
-        });
-
-        asyncClient.init(personal.getId(), netAddress, contactList).start();
+        button.setOnClickListener(v -> messages.append("\r\n" + message.getEditableText()));
     }
 }

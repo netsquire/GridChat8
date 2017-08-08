@@ -2,6 +2,7 @@ package com.vsorokin.gridchat8;
 
 import android.util.Log;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -17,24 +18,21 @@ class AsyncClient extends Thread {
     private HttpsURLConnection connection;
     private String id;
     private String localIp;
-    private List<String> contactList;
     private OkHttpClient client = new OkHttpClient();
 
     AsyncClient() {}
 
-    AsyncClient init(String id, String localIp, List<String> contactList) {
+    AsyncClient init(String id, String localIp) {
         this.id = id;
         this.localIp = localIp;
-        this.contactList = contactList;
         return this;
     }
 
     String getIpById(String id){
-        String op = "/ip/";
-        return getRequest(LOCATOR_URL, id, op, localIp);
+        return getRequest(LOCATOR_URL + id + "/ip/" + localIp);
     }
 
-    private String getRequest(String url, String... params){
+    private String getRequest(String url){
         Request request = new Request.Builder().url(url).build();
         Response response = null;
         try {

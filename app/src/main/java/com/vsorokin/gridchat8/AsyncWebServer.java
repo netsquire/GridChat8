@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.koushikdutta.async.AsyncServer;
 import com.koushikdutta.async.http.Multimap;
@@ -43,11 +44,20 @@ public class AsyncWebServer extends AppCompatActivity implements Runnable {
 
     void startServer() {
         server.get("/", (request, response) -> response.send("<h1>Hello!!!</h1>"));
+
         server.get("/info", (request, response) -> response.send("<h1>Info</h1>"));
+
         server.get("/m", (request, response) -> {
             Multimap query = request.getQuery();
             response.send("<h1>Got: " + query.entrySet().toString() + "</h1>");
         });
+
+        server.get("/msg", (request, response) -> {
+            TextView messages = (TextView) findViewById(R.id.Messages);
+            messages.append("\r\n" + request.getBody().toString());
+            response.send("200");
+        });
+
         server.listen(mAsyncServer, 8080);
     }
 
