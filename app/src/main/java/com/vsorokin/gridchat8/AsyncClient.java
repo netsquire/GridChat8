@@ -18,6 +18,7 @@ class AsyncClient extends Thread {
     private String id;
     private String localIp;
     private List<String> contactList;
+    private OkHttpClient client = new OkHttpClient();
 
     AsyncClient() {}
 
@@ -28,26 +29,20 @@ class AsyncClient extends Thread {
         return this;
     }
 
-    public void start(){
-        Log.i("CLIENT", "Starting client ");
-        String announceUrl = LOCATOR_URL + id + "/ip/" + localIp;
-        Request request = new Request.Builder().url(announceUrl).build();
+    String getIpById(String id){
+        String op = "/ip/";
+        return getRequest(LOCATOR_URL, id, op, localIp);
+    }
+
+    private String getRequest(String url, String... params){
+        Request request = new Request.Builder().url(url).build();
         Response response = null;
         try {
-            OkHttpClient client = new OkHttpClient();
             response = client.newCall(request).execute();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //Log.i("CLIENT", "Got response: " + response);
-    }
-
-    String getIpById(String id){
-        return null;
-    }
-
-    String get(String id){
-        return null;
+        return response != null ? response.toString() : null;
     }
 
 }
