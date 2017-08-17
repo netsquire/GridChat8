@@ -28,7 +28,12 @@ class AsyncClient extends Thread {
         return this;
     }
 
-    String getIpById(String id){
+    public void start(){
+        super.start();
+        //announceIp(Personal.getId());
+    }
+
+    private String announceIp(String id){
         return getRequest(LOCATOR_URL + id + "/ip/" + localIp);
     }
 

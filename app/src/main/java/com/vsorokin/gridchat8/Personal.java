@@ -8,11 +8,11 @@ package com.vsorokin.gridchat8;
 
 class Personal {
 
-    private String id;
+    private static String id;
     private String ip;
 
     Personal(String id) {
-        this.id = id;
+        Personal.id = id;
     }
 
     public String getIp() {
@@ -20,14 +20,14 @@ class Personal {
     }
 
     public void setId(String id) {
-        this.id = id;
+        Personal.id = id;
     }
 
     public void setIp(String ip) {
         this.ip = ip;
     }
 
-    public String getId() {
+    static String getId() {
         return id;
     }
 }

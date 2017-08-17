@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">GridChat 8</string>
     <string name="listOfMessages">List of messages</string>
+    <string name="contacts">Contacts</string>
 </resources>

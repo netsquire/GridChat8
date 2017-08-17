@@ -1,5 +1,9 @@
 package com.vsorokin.gridchat8;
 
+/**
+ * Unites server and client
+ *
+ */
 class NetProcessor extends Thread {
 
     private String netAddress;
