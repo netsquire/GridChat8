@@ -53,8 +53,8 @@ public class AsyncWebServer extends AppCompatActivity implements Runnable {
         });
 
         server.get("/msg", (request, response) -> {
-            TextView messages = (TextView) findViewById(R.id.Messages);
-            messages.append("\r\n" + request.getBody().toString());
+            //TextView messages = (TextView) findViewById(R.id.Messages);
+            //messages.append("\r\n" + request.getBody().toString());
             response.send("200");
         });
 

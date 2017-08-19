@@ -9,18 +9,21 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     Button contacts;
+    static NetProcessor netProcessor = new NetProcessor("ListView", "localId");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.i("TAG", "started.");
+        Log.i("NET", "started.");
+        netProcessor.start();
 
         contacts = (Button) findViewById(R.id.contacts);
         contacts.setOnClickListener(v -> {
             Intent intent = new Intent(this, ContactActivity.class);
             startActivity(intent);
         });
+
     }
 
 }
