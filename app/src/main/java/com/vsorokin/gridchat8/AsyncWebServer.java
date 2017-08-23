@@ -1,15 +1,18 @@
 package com.vsorokin.gridchat8;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.koushikdutta.async.AsyncServer;
 import com.koushikdutta.async.http.Multimap;
 import com.koushikdutta.async.http.server.AsyncHttpServer;
+
+import static com.vsorokin.gridchat8.MainActivity.message;
+import static com.vsorokin.gridchat8.MainActivity.radioMonitor;
 
 public class AsyncWebServer extends AppCompatActivity implements Runnable {
 
@@ -24,15 +27,12 @@ public class AsyncWebServer extends AppCompatActivity implements Runnable {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.menu_main, menu);
-        Log.i("TODO", " - onCreateOptionsMenu(Menu menu) launched.");
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        Log.i("TODO", " - onOptionsItemSelected(Menu menu) launched.");
         return true;
     }
 
@@ -53,11 +53,13 @@ public class AsyncWebServer extends AppCompatActivity implements Runnable {
         });
 
         server.get("/msg", (request, response) -> {
-            //TextView messages = (TextView) findViewById(R.id.Messages);
-            //messages.append("\r\n" + request.getBody().toString());
-            response.send("200");
+            runOnUiThread(() -> {
+                message.setText(message.getText() + " ooo ");
+                radioMonitor.setChecked(!radioMonitor.isChecked());
+            });
+            Log.d("OUT", "writing response...");
+            response.send("<h1>Got: RADIO  " + message.getText() + " </h1>");
         });
-
         server.listen(mAsyncServer, 8080);
     }
 

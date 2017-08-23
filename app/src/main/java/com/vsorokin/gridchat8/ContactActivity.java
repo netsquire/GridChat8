@@ -11,8 +11,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import static com.vsorokin.gridchat8.MainActivity.netProcessor;
-
 public class ContactActivity extends AppCompatActivity {
 
     static ArrayList<Contact> contactList = getContactList();
@@ -35,7 +33,7 @@ public class ContactActivity extends AppCompatActivity {
         contactListView.setDividerHeight(1);
 
         Button button = (Button) findViewById(R.id.start_monitor);
-        button.setOnClickListener(view -> demoRadio());
+        //button.setOnClickListener(view -> demoRadio());
     }
 
     void demoRadio(){

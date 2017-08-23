@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     Button contacts;
-    static NetProcessor netProcessor = new NetProcessor("ListView", "localId");
+    NetProcessor netProcessor = new NetProcessor("ListView", "localId");
+    static RadioButton radioMonitor;
+    static TextView message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        radioMonitor = (RadioButton) findViewById(R.id.monitor);
+        message = (TextView) findViewById(R.id.message);
     }
 
 }
