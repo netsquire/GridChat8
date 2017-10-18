@@ -1,5 +1,9 @@
 package com.vsorokin.gridchat8;
 
+import android.widget.Button;
+import android.widget.TextView;
+
+import okhttp3.OkHttpClient;
 import okhttp3.Response;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
@@ -7,6 +11,9 @@ import okio.ByteString;
 
 final class EchoWebSocketListener extends WebSocketListener {
     private static final int NORMAL_CLOSURE_STATUS = 1000;
+    //private Button start;
+    //private static TextView output;
+    //private OkHttpClient client;
 
     @Override
     public void onOpen(WebSocket webSocket, Response response) {
@@ -37,6 +44,7 @@ final class EchoWebSocketListener extends WebSocketListener {
         output("Error : " + t.getMessage());
     }
 
-    private void output(String s) {
+    private void output(final String txt) {
+        MainActivity.output(txt);
     }
 }

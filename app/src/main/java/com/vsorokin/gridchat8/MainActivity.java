@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button contacts;
     NetProcessor netProcessor = new NetProcessor("ListView", "localId");
+
     static RadioButton radioMonitor;
     static TextView message;
 
@@ -30,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
 
         radioMonitor = (RadioButton) findViewById(R.id.monitor);
         message = (TextView) findViewById(R.id.message);
+    }
+
+    public static void output(String text){
+        message.setText(message.getText().toString() + "\n\n" + text);
     }
 
 }

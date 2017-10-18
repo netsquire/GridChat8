@@ -1,12 +1,9 @@
 package com.vsorokin.gridchat8;
 
 import android.graphics.drawable.GradientDrawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -31,39 +28,8 @@ public class ContactActivity extends AppCompatActivity {
         int[] colors = {0, 0xFFFF0000, 0};
         contactListView.setDivider(new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, colors));
         contactListView.setDividerHeight(1);
-
-        Button button = (Button) findViewById(R.id.start_monitor);
-        //button.setOnClickListener(view -> demoRadio());
     }
 
-    void demoRadio(){
-        RadioButton radio = (RadioButton) findViewById(R.id.monitor);
-        radio.setChecked(true);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        radio.setChecked(false);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        radio.setChecked(true);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        radio.setChecked(false);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        radio.setChecked(true);
-    }
 
     static ArrayList<Contact> getContactList() {
         ArrayList<Contact> retList = new ArrayList<>();

@@ -13,6 +13,7 @@ class NetProcessor extends Thread {
     private AsyncClient asyncClient = new AsyncClient();
     private AsyncWebServer asyncServer = new AsyncWebServer();
 
+
     NetProcessor(String name, String id) {
         super(name);
         try {
@@ -27,7 +28,7 @@ class NetProcessor extends Thread {
         return netAddress;
     }
 
-    void listViewDemo(){
+/*    void listViewDemo(){
 
         try {
             Thread.sleep(2000);
@@ -40,5 +41,5 @@ class NetProcessor extends Thread {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

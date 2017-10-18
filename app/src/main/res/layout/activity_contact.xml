@@ -7,17 +7,6 @@
     <ListView
         android:id="@+id/contact_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
-
-    <Button
-        android:id="@+id/start_monitor"
-        android:text="Start monitoring"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <RadioButton
-        android:id="@+id/monitor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 </LinearLayout>

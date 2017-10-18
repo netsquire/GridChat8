@@ -1,6 +1,7 @@
 package com.vsorokin.gridchat8;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import static android.support.v4.content.ContextCompat.startActivity;
 
 public class ContactAdapter extends BaseAdapter {
 
@@ -48,11 +51,23 @@ public class ContactAdapter extends BaseAdapter {
         } else {
             holder = (Contact.ViewHolder) convertView.getTag();
         }
-        Contact node = contactList.get(position);
-        holder.nameView.setText(node.getName());
-        holder.idView.setText(String.format("By %s", node.getId()));
-        holder.ageView.setText(String.format(" %d ", node.getAge()));
-        holder.active.setChecked(node.isActive());
+        Contact contact = contactList.get(position);
+        holder.nameView.setText(contact.getName());
+        holder.idView.setText(String.format("By %s", contact.getId()));
+        holder.ageView.setText(String.format(" %d ", contact.getAge()));
+        holder.active.setChecked(contact.isActive());
+
+        View.OnClickListener contactListener = v -> {
+            Context context = v.getContext();
+            Contact chosenContact = contactList.get((int) v.getTag());
+            Intent intent = new Intent(context, MessagesActivity.class);
+            intent.putExtra(contact.getId(), chosenContact.getId());
+            context.startActivity(intent);
+            };
+        holder.nameView.setOnClickListener(contactListener);
+        holder.idView.setOnClickListener(contactListener);
+        holder.ageView.setOnClickListener(contactListener);
+
         return convertView;
-    }
+        };
 }
