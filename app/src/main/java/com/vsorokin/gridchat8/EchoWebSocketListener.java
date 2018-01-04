@@ -45,6 +45,6 @@ final class EchoWebSocketListener extends WebSocketListener {
     }
 
     private void output(final String txt) {
-        MainActivity.output(txt);
+        //MainActivity.output(txt);
     }
 }

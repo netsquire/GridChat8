@@ -1,23 +1,25 @@
 package com.vsorokin.gridchat8;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.koushikdutta.async.AsyncServer;
 import com.koushikdutta.async.http.Multimap;
 import com.koushikdutta.async.http.server.AsyncHttpServer;
 
-import static com.vsorokin.gridchat8.MainActivity.message;
-import static com.vsorokin.gridchat8.MainActivity.radioMonitor;
-
 public class AsyncWebServer extends AppCompatActivity implements Runnable {
 
+    private GridContext gridContext;
     private AsyncHttpServer server = new AsyncHttpServer();
     private AsyncServer mAsyncServer = new AsyncServer();
+
+    public AsyncWebServer(GridContext context){
+        gridContext = context;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ public class AsyncWebServer extends AppCompatActivity implements Runnable {
         startServer();
     }
 
-    void startServer() {
+    public void startServer() {
         server.get("/", (request, response) -> response.send("<h1>Hello!!!</h1>"));
 
         server.get("/info", (request, response) -> response.send("<h1>Info</h1>"));
@@ -52,10 +54,10 @@ public class AsyncWebServer extends AppCompatActivity implements Runnable {
             response.send("<h1>Got: " + query.entrySet().toString() + "</h1>");
         });
 
+        TextView message = findViewById(R.id.selfName); // TODO: REMOVE IT
         server.get("/msg", (request, response) -> {
             runOnUiThread(() -> {
                 message.setText(message.getText() + " ooo ");
-                radioMonitor.setChecked(!radioMonitor.isChecked());
             });
             Log.d("OUT", "writing response...");
             response.send("<h1>Got: RADIO  " + message.getText() + " </h1>");

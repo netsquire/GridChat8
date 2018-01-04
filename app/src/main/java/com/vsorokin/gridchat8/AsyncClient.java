@@ -1,5 +1,6 @@
 package com.vsorokin.gridchat8;
 
+import android.util.AndroidRuntimeException;
 import android.util.Log;
 import java.io.IOException;
 import java.util.Arrays;
@@ -13,16 +14,16 @@ import okhttp3.ResponseBody;
 
 import static com.vsorokin.gridchat8.Constants.LOCATOR_URL;
 
-class AsyncClient extends Thread {
+public class AsyncClient extends Thread {
 
     private HttpsURLConnection connection;
     private String id;
     private String localIp;
     private OkHttpClient client = new OkHttpClient();
 
-    AsyncClient() {}
+    public AsyncClient() {}
 
-    AsyncClient init(String id, String localIp) {
+    public AsyncClient init(String id, String localIp) {
         this.id = id;
         this.localIp = localIp;
         return this;
@@ -30,7 +31,7 @@ class AsyncClient extends Thread {
 
     public void start(){
         super.start();
-        //announceIp(Personal.getId());
+        announceIp(id);
     }
 
     private String announceIp(String id){
@@ -42,8 +43,9 @@ class AsyncClient extends Thread {
         Response response = null;
         try {
             response = client.newCall(request).execute();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | AndroidRuntimeException arte) {
+            //e.printStackTrace();
+            Log.i("Android Runtime", arte.getMessage());
         }
         return response != null ? response.toString() : null;
     }

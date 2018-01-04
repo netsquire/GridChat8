@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">GridChat 8</string>
     <string name="listOfMessages">List of messages</string>
-    <string name="contacts">Contacts</string>
+    <string name="letsGo">Let\'s go!</string>
     <string name="monitoring">"Start monitoring"</string>
 </resources>

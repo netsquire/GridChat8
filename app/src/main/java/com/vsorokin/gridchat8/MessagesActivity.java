@@ -1,9 +1,14 @@
 package com.vsorokin.gridchat8;
 
-/**
- *
- * Created by netsquire on 10/18/17.
- */
+import android.app.Activity;
+import android.os.Bundle;
 
-class MessagesActivity {
+public class MessagesActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_contact);
+
+    }
 }

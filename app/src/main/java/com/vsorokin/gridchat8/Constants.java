@@ -1,6 +1,6 @@
 package com.vsorokin.gridchat8;
 
-class Constants {
+public class Constants {
 
-    static final String LOCATOR_URL = "http://weblocator-netsquire.rhcloud.com/";
+    public static final String LOCATOR_URL = "http://peerlocator.herokuapp.com/";
 }

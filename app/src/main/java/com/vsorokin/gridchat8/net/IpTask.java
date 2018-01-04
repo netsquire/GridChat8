@@ -1,24 +1,32 @@
-package com.vsorokin.gridchat8;
+package com.vsorokin.gridchat8.net;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
-
 import java.util.Enumeration;
 
-class NetTask extends AsyncTask<String, Integer, String> {
+public class IpTask extends AsyncTask<Void, Void, Void> {
 
-    @Override
-    protected String doInBackground(String... params) {
-        return getAllIp(6);
+    private static final int IP_VERSION = 6;
+
+    private TextView view;
+    public IpTask(TextView selfIp) {
+        view = selfIp;
     }
 
-    private String getAllIp(int version) {
+    @Override
+    protected Void doInBackground(Void... voids) {
+        view.setText(getAllIp());
+        return null;
+    }
+
+    private String getAllIp() {
         String ipv4 = "?.?.?.?";
         String ipv6 = "?:?:?:?";
         try {
@@ -42,6 +50,6 @@ class NetTask extends AsyncTask<String, Integer, String> {
         } catch (SocketException e) {
             e.printStackTrace();
         }
-        return version == 4 ? ipv4 : ipv6;
+        return IP_VERSION == 4 ? ipv4 : ipv6;
     }
 }

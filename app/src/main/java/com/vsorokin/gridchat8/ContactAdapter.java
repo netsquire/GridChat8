@@ -2,15 +2,13 @@ package com.vsorokin.gridchat8;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-
-import static android.support.v4.content.ContextCompat.startActivity;
 
 public class ContactAdapter extends BaseAdapter {
 
@@ -59,9 +57,12 @@ public class ContactAdapter extends BaseAdapter {
 
         View.OnClickListener contactListener = v -> {
             Context context = v.getContext();
-            Contact chosenContact = contactList.get((int) v.getTag());
-            Intent intent = new Intent(context, MessagesActivity.class);
+            //
+            Log.i(" >>> Item: ", String.valueOf(v.getId()));
+            Contact chosenContact = contactList.get(3);
+            Intent intent = new Intent(context, ChatActivity.class);
             intent.putExtra(contact.getId(), chosenContact.getId());
+            intent.putExtra("name", "Netsquire");
             context.startActivity(intent);
             };
         holder.nameView.setOnClickListener(contactListener);
