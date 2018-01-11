@@ -39,6 +39,20 @@ class NetTasks extends AsyncTask<String, Integer, RouteInfo> {
         }
     };
 
+
+    /**
+     *
+     * @return - required class object
+     */
+    AsyncTask getTask(String determinant){
+        switch (determinant){
+            //case : return new ObtainOwnIp();
+              //  break;
+        }
+        return this;
+    }
+
+
     NetTasks(GridContext context){
         gridContext = context;
     }
@@ -46,14 +60,14 @@ class NetTasks extends AsyncTask<String, Integer, RouteInfo> {
     @Override
     protected RouteInfo doInBackground(String... strings) {
         String answer = getJsonIp(gridContext.getPeerName());
-        asyncServer.get().startServer();
+        //asyncServer.get().startServer();
         Log.i("Passed name", gridContext.getInstanceName());
         Log.i("resolver answered", answer);
         asyncClient.init(gridContext.getInstanceName(), answer).start();
-        String ip = announceNetAddress(getAllIp(6));
+        String ip = null; //announceNetAddress(getAllIp(6));
         return new RouteInfo(answer, ip);
     }
-
+/*
     public String getAllIp(int version) {
         String ipv4 = "?.?.?.?";
         String ipv6 = "?:?:?:?";
@@ -65,7 +79,7 @@ class NetTasks extends AsyncTask<String, Integer, RouteInfo> {
                 while (addrs.hasMoreElements()){
                     InetAddress inetAddress = addrs.nextElement();
                     if (!inetAddress.isLoopbackAddress()) {
-                        Log.d("IP", "HostAddress IP=" + inetAddress.getHostAddress());
+                        Log.i("IP", "HostAddress IP=" + inetAddress.getHostAddress());
                         if(inetAddress instanceof Inet4Address) {
                             ipv4 = inetAddress.getHostAddress();
                         }
@@ -79,7 +93,7 @@ class NetTasks extends AsyncTask<String, Integer, RouteInfo> {
             e.printStackTrace();
         }
         return version == 4 ? ipv4 : ipv6;
-    }
+    }*/
 
     private String announceNetAddress(String ip) {
         String url = buildAnnounceUrl(ip, gridContext.getInstanceName());

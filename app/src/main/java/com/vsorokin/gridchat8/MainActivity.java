@@ -1,26 +1,27 @@
 package com.vsorokin.gridchat8;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.vsorokin.gridchat8.net.NetProcessor;
-import com.vsorokin.gridchat8.net.IpTask;
+import com.vsorokin.gridchat8.net.ObtainOwnIp;
 
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
     GridContext gridContext = new GridContext();
-    //static AsyncTask<Void, Void, Void> ipTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Log.i("Show must ", "go on!");
 
         Button letsGo;
         TextView selfName, peerName, selfIp, peerIp;
@@ -30,21 +31,17 @@ public class MainActivity extends AppCompatActivity {
         selfName = findViewById(R.id.selfName);
         peerName = findViewById(R.id.peer);
         letsGo = findViewById(R.id.letsGo);
-
-        //ipTask = new IpTask(selfIp);
-        try {
-            new IpTask(selfIp).get();
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
+        //new NetProcessor(gridContext);
 
         letsGo.setOnClickListener(v -> {
             Intent intent = new Intent(this, ContactActivity.class);
             gridContext.setInstanceName(selfName.getText().toString());
             gridContext.setPeerName(peerName.getText().toString());
-            new NetProcessor(gridContext);
+
             startActivity(intent);
         });
+
+        new ObtainOwnIp(selfIp);
     }
 
 }

@@ -11,18 +11,16 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
 
-public class IpTask extends AsyncTask<Void, Void, Void> {
+public class ObtainOwnIp extends AsyncTask<Void, Void, Void> {
 
     private static final int IP_VERSION = 6;
 
-    private TextView view;
-    public IpTask(TextView selfIp) {
-        view = selfIp;
+    public ObtainOwnIp(TextView selfIp) {
+        selfIp.setText(getAllIp());
     }
 
     @Override
     protected Void doInBackground(Void... voids) {
-        view.setText(getAllIp());
         return null;
     }
 
