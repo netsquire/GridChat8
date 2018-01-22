@@ -13,13 +13,9 @@ import com.koushikdutta.async.http.server.AsyncHttpServer;
 
 public class AsyncWebServer extends AppCompatActivity implements Runnable {
 
-    private GridContext gridContext;
+    //private GridContext gridContext;
     private AsyncHttpServer server = new AsyncHttpServer();
     private AsyncServer mAsyncServer = new AsyncServer();
-
-    public AsyncWebServer(GridContext context){
-        gridContext = context;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

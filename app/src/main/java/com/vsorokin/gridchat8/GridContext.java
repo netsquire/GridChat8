@@ -7,20 +7,29 @@ package com.vsorokin.gridchat8;
 
 public class GridContext {
 
-    private String instanceName;
-    private String peerName;
+    private static String instanceName = "Put your name here";
+    private static String peerName;
+    private static String ip;
 
-    public String getInstanceName() {
+    public static String getInstanceName() {
         return instanceName;
     }
 
-    void setInstanceName(String instanceName) {
-        this.instanceName = instanceName;
+    public static String getIp() {
+        return ip;
     }
 
-    public String getPeerName() {return peerName;}
+    public static void setIp(String ip) {
+        GridContext.ip = ip;
+    }
 
-    void setPeerName(String peerName) {this.peerName = peerName;}
+    static void setInstanceName(String instanceName) {
+        GridContext.instanceName = instanceName;
+    }
+
+    public static String getPeerName() {return peerName;}
+
+    static void setPeerName(String peerName) { GridContext.peerName = peerName;}
 
 }
 

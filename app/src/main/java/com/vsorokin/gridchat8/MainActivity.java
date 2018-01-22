@@ -7,41 +7,39 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.vsorokin.gridchat8.net.NetProcessor;
-import com.vsorokin.gridchat8.net.ObtainOwnIp;
-
-import java.util.concurrent.ExecutionException;
+import com.vsorokin.gridchat8.net.NetService;
 
 public class MainActivity extends AppCompatActivity {
 
-    GridContext gridContext = new GridContext();
+    public TextView selfName;
+    public TextView peerName;
+    public TextView selfIp;
+    public TextView peerIp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.i("Show must ", "go on!");
-
         Button letsGo;
-        TextView selfName, peerName, selfIp, peerIp;
 
         selfIp = findViewById(R.id.selfIp);
         peerIp = findViewById(R.id.peerIp);
         selfName = findViewById(R.id.selfName);
+        selfName.setText(GridContext.getInstanceName());
         peerName = findViewById(R.id.peer);
         letsGo = findViewById(R.id.letsGo);
-        //new NetProcessor(gridContext);
 
+        NetService netService = new NetService();
         letsGo.setOnClickListener(v -> {
+            GridContext.setInstanceName(selfName.getText().toString());
+            GridContext.setPeerName(peerName.getText().toString());
+            netService.announce();
+            netService.getPeerAddress();
             Intent intent = new Intent(this, ContactActivity.class);
-            gridContext.setInstanceName(selfName.getText().toString());
-            gridContext.setPeerName(peerName.getText().toString());
-
             startActivity(intent);
         });
 
-        new ObtainOwnIp(selfIp);
     }
 
 }
