@@ -3,6 +3,7 @@ package com.vsorokin.gridchat8.net;
 import android.util.Log;
 
 import com.vsorokin.gridchat8.GridContext;
+import com.vsorokin.gridchat8.MainActivity;
 
 import java.net.Inet4Address;
 import java.net.Inet6Address;
@@ -44,6 +45,6 @@ public class ObtainOwnIp implements Runnable {
 
     @Override
     public void run() {
-        GridContext.setIp( getAllIp()) ;
+        GridContext.setIp( getAllIp() );
     }
 }

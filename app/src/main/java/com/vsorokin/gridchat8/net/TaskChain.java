@@ -3,11 +3,13 @@ package com.vsorokin.gridchat8.net;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.vsorokin.gridchat8.AsyncClient;
 import com.vsorokin.gridchat8.AsyncWebServer;
 import com.vsorokin.gridchat8.GridContext;
 import com.vsorokin.gridchat8.MainActivity;
+import com.vsorokin.gridchat8.R;
 import com.vsorokin.gridchat8.RouteInfo;
 import com.vsorokin.gridchat8.services.UrlService;
 
@@ -55,7 +57,7 @@ public class TaskChain {
 
     void announceAddress(){
         try {
-            executor.submit( announceOwnIp ).get();
+            executor.submit(announceOwnIp).get();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
@@ -104,9 +106,8 @@ public class TaskChain {
             Log.i("PEER URL", url);
             Request request = new Request.Builder().url(url).build();
             try {
-                Response response = new OkHttpClient().newCall(request).execute();
-                System.out.println("Peer Response: " + response);
-                Log.i("Peer Response: ", response.body().toString());
+                String response = new OkHttpClient().newCall(request).execute().body().string();
+                Log.i("Peer Response: ", response);
             } catch (IOException | NullPointerException e) {
                 e.printStackTrace();
             }

@@ -12,9 +12,7 @@ import com.vsorokin.gridchat8.net.NetService;
 public class MainActivity extends AppCompatActivity {
 
     public TextView selfName;
-    public TextView peerName;
     public TextView selfIp;
-    public TextView peerIp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,20 +20,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button letsGo;
-
+        NetService netService = new NetService();
         selfIp = findViewById(R.id.selfIp);
-        peerIp = findViewById(R.id.peerIp);
+        selfIp.setText(GridContext.getIp());
+
         selfName = findViewById(R.id.selfName);
-        selfName.setText(GridContext.getInstanceName());
-        peerName = findViewById(R.id.peer);
         letsGo = findViewById(R.id.letsGo);
 
-        NetService netService = new NetService();
         letsGo.setOnClickListener(v -> {
             GridContext.setInstanceName(selfName.getText().toString());
-            GridContext.setPeerName(peerName.getText().toString());
             netService.announce();
-            netService.getPeerAddress();
             Intent intent = new Intent(this, ContactActivity.class);
             startActivity(intent);
         });

@@ -9,11 +9,11 @@ import android.util.Log;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class ContactActivity extends AppCompatActivity {
 
     static ArrayList<Contact> contactList = getContactList();
-    static ContactAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,18 +35,12 @@ public class ContactActivity extends AppCompatActivity {
         });
     }
 
-/*    public void onResume() {
-        super.onResume();
-        startActivity( new Intent(this, ContactActivity.class)  );
-    }*/
-
     static ArrayList<Contact> getContactList() {
         ArrayList<Contact> retList = new ArrayList<>();
-        retList.add(new Contact("name", "id", 27, true));
-        retList.add(new Contact("name1", "pathos", 67, false));
-        retList.add(new Contact("name2", "wife", 47, true));
-        retList.add(new Contact("name3", "bro", 28, false));
-        retList.add(new Contact("name4", "me", 23, true));
+        Map<String, String> list = GridContext.getPeerList();
+        for (String name : list.keySet()){
+            retList.add(new Contact(name, list.get(name), 17, true));
+        }
         return retList;
     }
 }
