@@ -2,8 +2,7 @@ package com.vsorokin.gridchat8.net;
 
 import android.util.Log;
 
-import com.vsorokin.gridchat8.GridContext;
-import com.vsorokin.gridchat8.MainActivity;
+import com.vsorokin.gridchat8.model.GridContext;
 
 import java.net.Inet4Address;
 import java.net.Inet6Address;

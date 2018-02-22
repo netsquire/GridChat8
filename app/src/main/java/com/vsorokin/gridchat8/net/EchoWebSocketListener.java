@@ -1,4 +1,4 @@
-package com.vsorokin.gridchat8;
+package com.vsorokin.gridchat8.net;
 
 import android.widget.Button;
 import android.widget.TextView;

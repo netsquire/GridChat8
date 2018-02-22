@@ -8,21 +8,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import java.util.ArrayList;
+import com.vsorokin.gridchat8.model.Contact;
+import com.vsorokin.gridchat8.model.ContactHolder;
+
+import java.io.Serializable;
+import java.util.List;
 
 public class ContactAdapter extends BaseAdapter {
 
-    private ArrayList<Contact> contactList;
+    private List<Contact> contactList;
     private LayoutInflater layoutInflater;
 
-    public ContactAdapter(Context aContext, ArrayList<Contact> contactList) {
+    ContactAdapter(Context aContext, List<Contact> contactList) {
         this.contactList = contactList;
         this.layoutInflater = LayoutInflater.from(aContext);
     }
 
     @Override
     public int getCount() {
-        return contactList.size();
+        return contactList==null ? 0 : contactList.size();
     }
 
     @Override
@@ -37,32 +41,32 @@ public class ContactAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Contact.ViewHolder holder;
+        ContactHolder holder;
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.contact_row, null);
-            holder = new Contact.ViewHolder();
+            holder = new ContactHolder();
             holder.nameView = convertView.findViewById(R.id.name);
             holder.idView = convertView.findViewById(R.id.id);
             holder.ageView = convertView.findViewById(R.id.age);
             holder.active = convertView.findViewById(R.id.active);
             convertView.setTag(holder);
         } else {
-            holder = (Contact.ViewHolder) convertView.getTag();
+            holder = (ContactHolder) convertView.getTag();
         }
         Contact contact = contactList.get(position);
         holder.nameView.setText(contact.getName());
         holder.idView.setText(String.format("By %s", contact.getId()));
-        holder.ageView.setText(String.format(" %d ", contact.getAge()));
+        holder.ageView.setText("HZ");
         holder.active.setChecked(contact.isActive());
 
         View.OnClickListener contactListener = v -> {
             Context context = v.getContext();
-            //
             Log.i(" >>> Item: ", String.valueOf(v.getId()));
-            Contact chosenContact = contactList.get(3);
+            Contact chosenContact = contactList.get(position);
             Intent intent = new Intent(context, ChatActivity.class);
             intent.putExtra(contact.getId(), chosenContact.getId());
-            intent.putExtra("name", "Netsquire");
+            intent.putExtra("name", chosenContact.getName());
+            intent.putExtra("contact", chosenContact);
             context.startActivity(intent);
             };
         holder.nameView.setOnClickListener(contactListener);
@@ -70,5 +74,5 @@ public class ContactAdapter extends BaseAdapter {
         holder.ageView.setOnClickListener(contactListener);
 
         return convertView;
-        };
+        }
 }

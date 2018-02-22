@@ -3,10 +3,10 @@ package com.vsorokin.gridchat8;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.vsorokin.gridchat8.model.GridContext;
 import com.vsorokin.gridchat8.net.NetService;
 
 public class MainActivity extends AppCompatActivity {

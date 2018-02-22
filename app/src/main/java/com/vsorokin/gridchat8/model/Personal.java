@@ -1,4 +1,4 @@
-package com.vsorokin.gridchat8;
+package com.vsorokin.gridchat8.model;
 
 /**
  * All related to personal and identification

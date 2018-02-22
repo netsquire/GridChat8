@@ -1,29 +1,31 @@
 package com.vsorokin.gridchat8;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.vsorokin.gridchat8.model.Contact;
 
 public class ChatActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LinearLayout ll = new LinearLayout(this);
+        LinearLayout linearLayout = new LinearLayout(this);
         TextView tv = new TextView(this);
         Bundle extras = getIntent().getExtras();
-        String name = null;
+
+        System.out.println("EXTRAS: " + extras);
+        Contact peer = null;
+        //String name = "name", peerPosision = "peer", id = "id";
         if (extras != null) {
-            name = extras.getString("name");
+            peer = (Contact) extras.get("contact");
+            System.out.println("Contact name: " + (peer != null ? peer.getName() : "NONAME"));
             }
-        tv.setText("Hello, " + name);
-        ll.addView(tv);
-        setContentView(ll);
+        tv.setText("Hello, " + peer.getName() + " with " + peer.getIp());
+        linearLayout.addView(tv);
+        setContentView(linearLayout);
     }
 
 }

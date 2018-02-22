@@ -1,4 +1,4 @@
-package com.vsorokin.gridchat8;
+package com.vsorokin.gridchat8.net;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.koushikdutta.async.AsyncServer;
 import com.koushikdutta.async.http.Multimap;
 import com.koushikdutta.async.http.server.AsyncHttpServer;
+import com.vsorokin.gridchat8.R;
 
 public class AsyncWebServer extends AppCompatActivity implements Runnable {
 

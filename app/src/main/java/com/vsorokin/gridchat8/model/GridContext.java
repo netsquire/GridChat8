@@ -1,13 +1,15 @@
-package com.vsorokin.gridchat8;
+package com.vsorokin.gridchat8.model;
 
-import java.util.Map;
+import java.util.List;
 
 public class GridContext {
 
     private static String instanceName = "your name here";
     private static String peerName;
     private static String ip;
-    private static Map<String, String> peerList;
+    private static List<Contact> peerList;
+
+    private static int position;
 
     public static String getInstanceName() {
         return instanceName;
@@ -21,7 +23,7 @@ public class GridContext {
         GridContext.ip = ip;
     }
 
-    static void setInstanceName(String instanceName) {
+    public static void setInstanceName(String instanceName) {
         GridContext.instanceName = instanceName;
     }
 
@@ -29,12 +31,20 @@ public class GridContext {
 
     static void setPeerName(String peerName) { GridContext.peerName = peerName;}
 
-    public static void setPeerList(Map<String, String> peerList) {
+    public static void setPeerList(List<Contact> peerList) {
         GridContext.peerList = peerList;
     }
 
-    public static Map<String, String> getPeerList() {
+    public static List<Contact> getPeerList() {
         return peerList;
+    }
+
+    public static int getPosition() {
+        return position;
+    }
+
+    public static void setPosition(int position) {
+        GridContext.position = position;
     }
 }
 

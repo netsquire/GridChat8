@@ -1,11 +1,5 @@
 package com.vsorokin.gridchat8.net;
 
-import android.util.Log;
-
-import com.vsorokin.gridchat8.AsyncClient;
-import com.vsorokin.gridchat8.AsyncWebServer;
-import com.vsorokin.gridchat8.GridContext;
-
 /**
  * Unites server and client
  *
@@ -21,15 +15,16 @@ import com.vsorokin.gridchat8.GridContext;
 public class NetService extends Thread {
 
     private TaskChain chain = new TaskChain();
-    private AsyncClient asyncClient = new AsyncClient();
+
     private AsyncWebServer asyncServer = new AsyncWebServer();
+
+    private AsyncClient asyncClient = new AsyncClient();
 
     public NetService() {
         chain.init();
     }
 
     public void announce(){
-        Log.i("Started", "announce()");
         chain.announceAddress();
     }
 
