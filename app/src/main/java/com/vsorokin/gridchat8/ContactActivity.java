@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.vsorokin.gridchat8.model.Contact;
@@ -23,7 +24,9 @@ public class ContactActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contact);
 
         ListView contactListView = findViewById(R.id.activity_contact);
-        contactListView.setAdapter(new ContactAdapter(getApplicationContext(), GridContext.getPeerList()));
+        List<Contact> peerList = GridContext.getPeerList();
+        //Log.i("peerList=", peerList.toString());
+        contactListView.setAdapter(new ContactAdapter(getApplicationContext(), peerList));
         int[] colors = {0, 0xFFFF0000, 0};
         contactListView.setDivider(new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, colors));
         contactListView.setDividerHeight(1);

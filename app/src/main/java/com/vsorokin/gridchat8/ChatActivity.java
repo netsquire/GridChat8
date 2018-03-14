@@ -18,12 +18,11 @@ public class ChatActivity extends Activity {
 
         System.out.println("EXTRAS: " + extras);
         Contact peer = null;
-        //String name = "name", peerPosision = "peer", id = "id";
         if (extras != null) {
             peer = (Contact) extras.get("contact");
-            System.out.println("Contact name: " + (peer != null ? peer.getName() : "NONAME"));
             }
-        tv.setText("Hello, " + peer.getName() + " with " + peer.getIp());
+            // add zero checks
+        tv.setText("Hello, " + peer.getId() + " with " + peer.getIp());
         linearLayout.addView(tv);
         setContentView(linearLayout);
     }
