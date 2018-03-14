@@ -6,6 +6,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.vsorokin.gridchat8.model.Contact;
+import com.vsorokin.gridchat8.model.GridContext;
+import com.vsorokin.gridchat8.net.AsyncClient;
+import com.vsorokin.gridchat8.net.AsyncWebServer;
 
 public class ChatActivity extends Activity {
 
@@ -16,13 +19,20 @@ public class ChatActivity extends Activity {
         TextView tv = new TextView(this);
         Bundle extras = getIntent().getExtras();
 
-        System.out.println("EXTRAS: " + extras);
+        //System.out.println("EXTRAS: " + extras);
         Contact peer = null;
         if (extras != null) {
             peer = (Contact) extras.get("contact");
             }
+
             // add zero checks
-        tv.setText("Hello, " + peer.getId() + " with " + peer.getIp());
+        tv.setText("[" + GridContext.getInstanceName() + " <-> " + peer.getId() + "] ("
+                + GridContext.getIp() + " <-> " + peer.getIp() + ")");
+
+        // start WebSocket session here - connect()
+        AsyncClient asyncClient = new AsyncClient();
+        AsyncWebServer asyncWebServer = new AsyncWebServer();
+
         linearLayout.addView(tv);
         setContentView(linearLayout);
     }

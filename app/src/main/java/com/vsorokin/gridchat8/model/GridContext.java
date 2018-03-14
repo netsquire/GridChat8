@@ -4,7 +4,7 @@ import java.util.List;
 
 public class GridContext {
 
-    private static String instanceName = "your name here";
+    private static String instanceName = "Local instance name";
     private static String peerName;
     private static String ip;
     private static List<Contact> peerList;

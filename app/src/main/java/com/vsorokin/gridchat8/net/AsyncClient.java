@@ -18,7 +18,7 @@ public class AsyncClient extends Thread {
     private String localIp;
     private OkHttpClient client = new OkHttpClient();
 
-    AsyncClient() {}
+    public AsyncClient() {}
 
     public AsyncClient init(String id, String localIp) {
         this.id = id;

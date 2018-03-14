@@ -24,8 +24,8 @@ public class TaskChain {
     private ExecutorService executor = Executors.newSingleThreadExecutor();
     private OkHttpClient httpClient = new OkHttpClient();
 
-    private AsyncClient asyncClient = new AsyncClient();
-    AsyncWebServer asyncWebServer = new AsyncWebServer();
+    /*private AsyncClient asyncClient = new AsyncClient();
+    AsyncWebServer asyncWebServer = new AsyncWebServer();*/
 
     //ExecutorService executor = Executors.newWorkStealingPool();
     private Callable<Object> obtainOwnIp = Executors.callable(new ObtainOwnIp());
